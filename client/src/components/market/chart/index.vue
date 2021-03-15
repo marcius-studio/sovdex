@@ -1,18 +1,12 @@
 <template>
     <div class="content ">
-        <div class="content-header content-padding">
-            <div class="unit" v-if="isDataLoaded">
-                <div class="unit-section p-relative">
-                    <span class="text-sm text-secondary p-absolute" v-html="legend" style="line-height: 15px;"></span>
-                </div>
-                <div class="unit-section">
-                    <intervals v-model="interval" />
-                </div>
-            </div>
+        <div class="content-header">
+            <intervals />
         </div>
-        <div class="content-body">
-            <div class="loading loading-lg fill" v-show="!isDataLoaded"></div>
+        <div class="content-body d-flex justify-center align-center" style="position: relative;">
+            <v-progress-circular :width="3" size="70" indeterminate v-show="!isDataLoaded"></v-progress-circular>
             <div class="fill" ref="chart" v-show="isDataLoaded"></div>
+            <span class="grey--text text-sm legend" v-html="legend" />
         </div>
     </div>
 </template>
@@ -27,7 +21,7 @@
     // import volume from './mixins/volume'
 
     // components
-    import intervals from './intervals'
+    import intervals from './modules/intervals'
 
     const defaultData = [
         { time: "2018-12-19", open: 141.77, high: 170.39, low: 120.25, close: 145.72 },
@@ -40,7 +34,6 @@
     export default {
         mixins: [dataProvider, legend, preloader], // volume, 
         data: () => ({
-            interval: '4h',
             chart: null,
             series: null,
         }),
@@ -71,7 +64,7 @@
                         borderVisible: false,
                     },
                     layout: {
-                        backgroundColor: '#1e2023',
+                        backgroundColor: '#121212',
                         textColor: 'rgba(255,255,255, .5)',
                     },
                     priceScale: {
@@ -107,11 +100,16 @@
                 this.createChart() // create chart again
             }
         },
+        computed: {
+            interval() {
+                return this.$route.query.interval || '5m'
+            }
+        },
         watch: {
-            '$route.params.symbol'(val){
+            '$route.params.symbol'() {
                 this.reCreateChart()
             },
-            interval(val) {
+            '$route.query.interval'() {
                 this.reCreateChart()
             },
             isDataLoaded(val) {
@@ -128,5 +126,13 @@
     .fill {
         width: 100%;
         height: 100%;
+    }
+
+    .legend {
+        line-height: 15px;
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        z-index: 9;
     }
 </style>

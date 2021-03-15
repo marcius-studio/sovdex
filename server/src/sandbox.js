@@ -1,4 +1,6 @@
-export const schema = {
+import axios from 'axios'
+
+const schema = {
     soveos: {
         "code": "sovdexrelays",
         "scope": "EOS",
@@ -31,7 +33,16 @@ export const schema = {
     }
 }
 
-export const config = {
-    markets: Object.keys(schema), // [ 'soveos', 'svxeos', 'sovusdt', 'eospbtc', 'powpbtc' ]
-    intervals: ['5m', '15m', '1h', '4h', '1d']
+function request(data) {
+    return axios({
+        method: 'post',
+        url: 'http://eos.greymass.com/v1/chain/get_table_rows',
+        data
+    })
+        .then(res => res.data)
+        .catch(err => console.log(err))
 }
+
+
+request(schema.soveos).then(res=> console.log(res))
+

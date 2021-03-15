@@ -1,5 +1,28 @@
 <template>
-    <div class="header flex-centered bg-secondary">
+    <div class="d-none d-sm-flex">
+        <v-toolbar flat>
+            <img :src="logo" width="50px" class="mr-5" alt="">
+
+            <!--icon-svg class="mr-2" name="logo" width="60px" height="60px"></icon-svg-->
+            <v-toolbar-items v-for="(i,idx) in schema" :key="idx" v-if="(i.auth && $store.getters.isAuth) || !i.auth">
+                <v-btn :to="i.to" text>{{ i.label }}</v-btn>
+            </v-toolbar-items>
+
+
+            <v-spacer></v-spacer>
+
+            <v-btn @click="$bus.$emit('settings')" v-if="$store.getters.isAuth" icon>
+                <v-icon>settings_input_antenna</v-icon>
+            </v-btn>
+
+         
+            <btn-auth class="mr-2" />
+           
+
+        </v-toolbar>
+    </div>
+
+    <!--div class="header flex-centered bg-secondary">
         <div class="container grid-xl">
             <div class="unit">
                 <div class="unit-section">
@@ -26,31 +49,22 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div-->
 </template>
 
 <script>
-    import auth from '../../user/auth'
+    import btnAuth from '@/components//user/auth'
+    import schema from './schema'
+
+    import logo from '@/assets/icons/logo.png'
 
     export default {
         data: () => ({
-            schema: [
-                {
-                    name: 'Stake',
-                    route: { name: 'stake' }
-                },
-                {
-                    name: 'Exchange',
-                    route: { name: 'market', params: { symbol: 'soveos' } }
-                },
-                {
-                    name: 'Mine',
-                    route: { name: 'mine' }
-                }
-            ]
+            logo,
+            schema
         }),
         components: {
-            auth
+            btnAuth
         }
     }
 </script>

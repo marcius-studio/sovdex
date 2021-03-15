@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import vuetify from '@/plugins/vuetify'
 import router from './router'
 import store from './store'
 
@@ -10,7 +11,6 @@ import './components/modules/components'
 import './components/user/components'
 
 // import static
-import 'material-icons'
 import './static/main.scss'
 
 Vue.config.productionTip = false
@@ -20,4 +20,5 @@ new Vue({
     render: h => h(App),
     store,
     router,
+    vuetify,
 })

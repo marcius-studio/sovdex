@@ -1,16 +1,19 @@
 <template>
-    <div class="section">
-        <div class="section-item section-item-filled">
-            <div class="columns text-center">
-                <div class="column col-6 col-sm-12">
-                    <span class="text-semibold">{{sov}}</span> <span class="text-secondary">SOV</span>
-                </div>
-                <div class="column col-6 col-sm-12">
-                    <span class="text-semibold">{{svx}}</span> <span class="text-secondary">SVX</span>
-                </div>
-            </div>
-        </div>
-    </div>
+    <v-row>
+        <v-col cols=12 md=6 sm=12>
+            <v-card class="px-5 py-5" elevation=3>
+                <div class="grey--text h4">SOV amount</div>
+                <div>{{sov}}</div>
+            </v-card>
+        </v-col>
+        <v-col cols=12 md=6 sm=12>
+            <v-card class="px-5 py-5" elevation=3>
+                <div class="grey--text h4">SVX amount</div>
+                <div>{{svx}}</div>
+            </v-card>
+        </v-col>
+    </v-row>
+    </v-card>
 </template>
 
 

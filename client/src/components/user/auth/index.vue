@@ -1,8 +1,7 @@
 <template>
-    <div :class="_class" @click="auth" :disabled="!$store.getters.isConnected">
-        <span class="material-icons">power_settings_new</span>
-        <span class="ml05" v-if="!symbol">Sign {{isAuth ? 'out' : 'in'}}</span>
-    </div>
+    <v-btn @click="submit" :class="[isAuth ? 'orange--text' : '']" :disabled="!$store.getters.isConnected" icon>
+        <v-icon>power_settings_new</v-icon>
+    </v-btn>
 </template>
 
 <script>
@@ -39,7 +38,6 @@
             host() {
                 return this.$store.state.blockchain.host
             },
-
             eos: {
                 get() {
                     return this.$store.state.blockchain.eos
@@ -55,12 +53,6 @@
                 set(val) {
                     this.$store.commit('setScatter', val)
                 }
-            },
-            _class() {
-                if (this.symbol) {
-                    return this.isAuth ? 'text-warning' : ''
-                }
-                return this.isAuth ? 'btn btn-warning' : 'btn btn-primary'
             },
         },
         mounted() {
@@ -96,7 +88,7 @@
                     })
 
             },
-            auth() {
+            submit() {
                 this.isAuth ? this.logout() : this.login()
             },
             login() {
@@ -115,8 +107,10 @@
             },
             logout() {
                 this.$store.commit('logout')
-                return ScatterJS.logout()
-                    .then(res => console.log('[auth] Sign out'))
+                return ScatterJS.logout().then(() => {
+                    console.log('[auth] Sign out')
+                    this.$router.push({ name: 'home' })
+                })
             }
         },
     }

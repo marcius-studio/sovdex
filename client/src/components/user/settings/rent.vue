@@ -1,23 +1,10 @@
 <template>
     <div>
-        <div class="section-title">Rent</div>
-        <div class="form-group">
-            <input type="number" min="0" class="form-input" v-model="quantity">
-            <label>SOV quantity</label>
-        </div>
-        <div class="columns">
-            <div class="column col-4">
-                <button class="btn btn-primary btn-sm btn-block" @click="submit('Rent CPU')"
-                    :disabled="$v.quantity.$invalid">Rent CPU</button>
-            </div>
-            <div class="column col-4">
-                <button class="btn btn-primary btn-sm btn-block" @click="submit('Rent NET')"
-                    :disabled="$v.quantity.$invalid">Rent NET</button>
-            </div>
-            <div class="column col-4">
-                <button class="btn btn-primary btn-sm btn-block" @click="submit('Buy RAM')"
-                    :disabled="$v.quantity.$invalid">Buy RAM</button>
-            </div>
+        <v-text-field  type="number" min="0" v-model="quantity" label="SOV quantity"> </v-text-field>
+        <div class="d-flex justify-space-between">
+            <v-btn @click="submit('Rent CPU')"  :disabled="$v.quantity.$invalid" elevation=0 small> Rent CPU </v-btn>
+            <v-btn  @click="submit('Rent NET')" :disabled="$v.quantity.$invalid" elevation=0 small> Rent CPU </v-btn>
+            <v-btn   @click="submit('Buy RAM')" :disabled="$v.quantity.$invalid" elevation=0 small> Buy RAM </v-btn>
         </div>
     </div>
 </template>

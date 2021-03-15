@@ -16,5 +16,4 @@ app.listen(3000, (err) => {
   console.log('Server ready at http://localhost:3000')
 })
 
-console.log('[api] start')
-console.log('Process', process.env.NODE_ENV || 'development')
+console.log(`Process ${process.env.NODE_ENV || 'development'}`)

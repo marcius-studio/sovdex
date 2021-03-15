@@ -10,6 +10,7 @@ const options = {
 	useCreateIndex: true,
 	// socketTimeoutMS: 60000, // Close sockets after 60 seconds of inactivity
 	useUnifiedTopology: true,
+	useFindAndModify: false,
 }
 
 const connection = ({ user, password, cluster }) => `${user}:${password}@${cluster}.mongodb.net/${database}?retryWrites=true`
@@ -17,6 +18,6 @@ const connection = ({ user, password, cluster }) => `${user}:${password}@${clust
 mongoose.connect(`mongodb+srv://${connection({ ...global.config.db })}`, options)
 
 mongoose.connection.on('error', console.error.bind(console, 'connection error:'))
-mongoose.connection.once('open', () => console.log('\x1b[36m', 'Connected to DataBase'))
+mongoose.connection.once('open', () => console.log('Connected to DataBase'))
 
 export default mongoose

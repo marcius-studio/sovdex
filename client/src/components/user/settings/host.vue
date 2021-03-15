@@ -1,11 +1,7 @@
 <template>
-    <div>
-        <div class="section-title mb0">Host</div>
-        <div class="form-group form-action">
-            <input class="form-input" v-model="host">
-            <span class="material-icons link action" @click="$store.commit('setHost', host)">cached</span>
-        </div>
-    </div>
+    <v-text-field v-model="host" label="Host">
+        <v-icon @click="$store.commit('setHost', host)" slot="append">cached</v-icon>
+    </v-text-field>
 </template>
 
 <script>

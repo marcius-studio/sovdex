@@ -8,14 +8,14 @@ You can also join our for more information and to have fun with the rest of the 
 
 ![image](docs/localhost_8080.png)
 
-## For users 🖖
+## For users
 
 First you need to follow a few steps:
 
 * Install [TokenPocket](https://www.tokenpocket.pro/en/) => Auth => set Private key
 * [Open webapp](https://soveos.github.io/SOVDEX/) => press button "Sign in"
 
-## For developers 😎
+## For developers
 
 To organize app, we use solutions:
 
@@ -28,32 +28,23 @@ Feel free to contribute!
 Required [Node.js](https://nodejs.org/en/)
 
 ```node
+// install dependencies
 $ cd client && yarn
 $ cd server && yarn
+
+// client
+$ yarn run serve
+$ yarn run build
+
+// server
+$ yarn run start
+$ yarn run build
 ```
 
-### Run
-
-```node
-$ cd client && yarn run serve
-$ cd server && yarn run start
-```
-
-### Build
-
-```node
-$ cd client && yarn run build
-$ cd server && yarn run build
-```
-
-Build folder `dist`
+Build folder `dist`.
 
 ## Contributors
 
 <a href="https://github.com/marcius-studio">
 <img src="https://raw.githubusercontent.com/marcius-studio/storage/master/badge-marcius-studio.svg" height="60">
 </a>   
-
-## Licence
-
-[MIT](http://opensource.org/licenses/MIT)

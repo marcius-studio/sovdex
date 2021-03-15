@@ -1,32 +1,24 @@
 <template>
-    <div class="content-padding width100" v-if="$store.getters.isAuth">
-        <div class="columns mb05">
-            <div class="column col-12 col-sm-6">
-                <div class="form-group form-action mb05">
-                    <input type="number" min="0" :max="balance[pair.quote]" :step="step(pair.quote)" class="form-input"
-                        v-model="buyAmount">
-                    <span class="action text-uppercase text-secondary">{{pair.quote}}</span>
-                </div>
+    <div>
+        <v-row>
+            <v-col cols=12>
+                <v-text-field type="number" min="0" :max="balance[pair.quote]" :step="step(pair.quote)"  :suffix="pair.quote"
+                    v-model="buyAmount" outlined :hint="`${balance[pair.quote] || 0} ${pair.quote}`" :disabled="!$store.getters.isAuth" persistent-hint>
+                </v-text-field>
+                <v-btn @click="buy" color="success" large block :disabled="!$store.getters.isAuth">
+                    Buy <span>{{cutBancor(bancorPrice.buy, pair.base)}} {{pair.base}}</span>
+                </v-btn>
+            </v-col>
+            <v-col cols=12>
+                <v-text-field type="number" min="0" :max="balance[pair.base]" :step="step(pair.base)" :suffix="pair.base" :disabled="!$store.getters.isAuth"
+                    v-model="sellAmount" outlined :hint="`${balance[pair.base] || 0} ${pair.base}`" persistent-hint>
+                </v-text-field>
+                <v-btn @click="sell" color="error" large block :disabled="!$store.getters.isAuth">
+                    Sell <span>{{cutBancor(bancorPrice.sell, pair.quote)}} {{pair.quote}}</span>
+                </v-btn>
+            </v-col>
 
-                <button class="btn btn-primary btn-block btn-success btn-lg" @click="buy">
-                    Buy <span class="text-uppercase">{{pair.base}}</span>
-                    <div class="text-normal">{{cutBancor(bancorPrice.buy, pair.base)}} {{pair.base}}</div>
-                </button>
-                <div class="text-sm text-secondary"><b>{{balance[pair.quote] || 0}}</b> {{pair.quote}}</div>
-            </div>
-            <div class="column col-12 col-sm-6">
-                <div class="form-group form-action mb05">
-                    <input type="number" min="0" :max="balance[pair.base]" :step="step(pair.base)" class="form-input"
-                        v-model="sellAmount">
-                    <span class="action text-uppercase text-secondary">{{pair.base}}</span>
-                </div>
-                <button class="btn btn-primary btn-block btn-error btn-lg" @click="sell">
-                    Sell <span class="text-uppercase">{{pair.base}}</span>
-                    <div class="text-normal">{{cutBancor(bancorPrice.sell, pair.quote)}} {{pair.quote}}</div>
-                </button>
-                <div class="text-sm text-secondary"><b>{{balance[pair.base] || 0}}</b> {{pair.base}}</div>
-            </div>
-        </div>
+        </v-row>
     </div>
 </template>
 

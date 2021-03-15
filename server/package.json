@@ -1,15 +1,12 @@
 {
-  "name": "@sovdex/server",
+  "name": "server",
   "version": "1.0.0",
   "description": "",
   "main": "src/main.js",
   "scripts": {
     "start": "nodemon --exec babel-node .",
-    "start:production": "cross-env NODE_ENV=production nodemon --exec babel-node .",
-    "build": "npm run build:api && npm run build:klines",
-    "build:api": "cross-env NODE_ENV=production webpack --progress",
-    "start:klines": "nodemon --exec babel-node klines",
-    "build:klines": "cross-env NODE_ENV=production webpack klines -o dist/klines.js --progress"
+    "build": "cross-env NODE_ENV=production webpack --progress",
+    "sandbox": "nodemon --exec babel-node src/sandbox.js"
   },
   "author": "",
   "license": "ISC",
@@ -19,15 +16,15 @@
     "axios": "0.19.2",
     "cron": "1.8.2",
     "koa": "2.13.0",
-    "moment": "2.27.0",
+    "moment": "2.29.1",
     "mongoose": "5.9.22",
     "timestring": "6.0.0"
   },
   "devDependencies": {
-    "@babel/preset-env": "7.11.5",
     "@babel/core": "7.9.6",
     "@babel/node": "7.8.7",
     "@babel/plugin-transform-runtime": "7.10.0",
+    "@babel/preset-env": "7.11.5",
     "@babel/runtime": "7.10.0",
     "babel-loader": "8.1.0",
     "cross-env": "6.0.3",

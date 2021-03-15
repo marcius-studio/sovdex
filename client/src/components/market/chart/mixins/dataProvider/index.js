@@ -40,23 +40,29 @@ export default {
     },
     methods: {
         getData(params) {
-            this.request(params).then(({ data }) => {
-                if (data.length > 0) {
-                    this.data = this.updateCandles(data)
+            this.request(params).then(res => {
+                if (res.length > 0) {
+                    this.data = this.updateCandles(res)
                     this.isDataLoaded = true // disable preloader
                 }
             })
         },
         updateCandles(data) {
-            return data.map(i => ({ time: i.openTime / 1000, ...i }))
+            return data.map(i => ({
+                time: i.ts / 1000,
+                open: i.o,
+                high: i.h,
+                low: i.l,
+                close: i.c,
+            }))
         },
-        request({ symbol = 'soveos', interval = '5m', limit = '300' }) {
+        request({ symbol = 'soveos', interval = '5m', limit = '500' }) {
             return axios({
                 method: 'get',
                 url: this.host,
                 params: { symbol, interval, limit }
             })
-                .then(res => res)
+                .then(res => res.data)
                 .catch(error => console.error(error))
         },
     },

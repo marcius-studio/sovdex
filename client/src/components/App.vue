@@ -1,22 +1,25 @@
 <template>
-    <div class="content">
-        <div class="z-index-1" style="box-shadow: 0 0 10px rgba(0,0,0,.1);">
-            <theader />
-        </div>
-        <div class="content-body">
-            <router-view></router-view>
-        </div>
-        <div class="content-footer z-index-1" style="box-shadow: 0 0 10px rgba(0,0,0,.1);">
-            <bottomNavigation />
-        </div>
+    <v-app>
+        <div class="content">
+            <div class="content-header" style="z-index: 9;">
+                <headerNavigation />
+            </div>
+            <div class="content-body" :class="{'mobile-padding':  $store.getters.isAuth}">
+                <router-view></router-view>
+            </div>
+            <div class="content-footer">
+                <bottomNavigation />
 
-        <settings />
-    </div>
+                <!--components-->
+                <settings />
+            </div>
+        </div>
+    </v-app>
 </template>
 
 <script>
-    import theader from './modules/navigation/header'
-    import bottomNavigation from './modules/navigation/bottomNavigation'
+    import headerNavigation from './modules/navigation/header'
+    import bottomNavigation from './modules/navigation/bottom'
 
     import isConnected from './modules/isConnected'
 
@@ -29,8 +32,9 @@
             console.log('%c Developed by Nikita Marcius', 'background: #5490f1; color: white; display: block;', 'https://github.com/nikitamarcius')
         },
         components: {
-            theader,
+            headerNavigation,
             bottomNavigation,
+
             isConnected,
 
             balance,
@@ -38,3 +42,11 @@
         }
     }
 </script>
+
+<style lang=scss scoped>
+    @media screen and (max-width: 600px) {
+        .mobile-padding {
+            padding-bottom: 56px;
+        }
+    }
+</style>

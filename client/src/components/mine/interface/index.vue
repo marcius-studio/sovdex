@@ -1,40 +1,68 @@
 <template>
-    <div class="section">
-        <div class="section-item section-item-filled">
-            <div class="toast mb">
-                <div class="mb05">Mining <span class="text-primary">1 SVX</span> Burns <span
-                        class="text-warning text-semibold">{{miningCost}} SOV</span></div>
-                <ul class="text-sm">
-                    <li>Reward per action: <span class="text-primary">{{miningRate}}</span> SVX</li>
-                    <li>Reward per transaction: <span class="text-primary">{{total.miningRate}}</span> SVX</li>
-                    <li>Total Burn per ransaction: <span class="text-error">{{total.burn}}</span> SOV</li>
-                    <li>Bonus for staking SVX: <span
-                            :class="[miningBonus >= 50 ? 'text-success' : 'text-warning']">{{miningBonus}}%</span></li>
-                </ul>
-            </div>
-            <div class="form-group mb05">
-                <input type="number" class="form-input" v-model="targetMiningRate" min="0" step="0.01" required>
-                <label>Mining rate</label>
-            </div>
-            <div class="text-sm text-secondary mb">
-                Mine when single action reward is ≥ {{targetMiningRate}}
-            </div>
+    <v-row>
+        <v-col cols=12 md=6 sm=12>
+            <v-card elevation=3>
+                <v-card-text>
+                    <div>Mining <span class="primary--text">1 SVX</span> Burns <span class="red--text">{{miningCost}}
+                            SOV</span>
+                    </div>
+                    <ul>
+                        <li>Reward per action: <span class="primary--text">{{miningRate}}</span> SVX</li>
+                        <li>Reward per transaction: <span class="primary--text">{{total.miningRate}}</span> SVX</li>
+                        <li>Total Burn per ransaction: <span class="red--text">{{total.burn}}</span> SOV</li>
+                        <li>Bonus for staking SVX: <span
+                                :class="[miningBonus >= 50 ? 'green--text' : 'red--text']">{{miningBonus}}%</span></li>
+                    </ul>
+                </v-card-text>
+            </v-card>
+        </v-col>
 
-            <button class="btn btn-primary btn-block mb05" @click="submit"> Burn mine x{{range}} </button>
+        <v-col cols=12 md=6 sm=12>
+            <v-card>
+                <v-card-text>
+                    <v-text-field type="number" label="Target reward" v-model="targetMiningRate" min="0" step="0.01" />
+                    <div class="grey--text">Mine when single action reward is ≥ {{targetMiningRate}}</div>
+                </v-card-text>
+                <v-divider></v-divider>
+                <v-card-text>
+                    <v-list>
 
-            <input type="range" v-model="range" min="1" max="200" step="1" class="slider mb">
+                        <v-list-item>
+                            <v-list-item-icon>
+                                <v-icon>cached</v-icon>
+                            </v-list-item-icon>
+                            <v-list-item-content>
+                                <v-list-item-title>Auto mine</v-list-item-title>
+                            </v-list-item-content>
+                            <v-list-item-action>
+                                <v-switch v-model="isAuto"></v-switch>
+                            </v-list-item-action>
+                        </v-list-item>
 
-            <label class="form-switch flex-centered-vertical">
-                <input type="checkbox" v-model="isAuto">
-                <i class="form-icon"></i>
-                <span class="text-secondary text-sm ml05">Auto mine</span>
-            </label>
+                        <v-list-item>
+                            <v-list-item-icon>
+                                <v-icon>local_fire_department</v-icon>
+                            </v-list-item-icon>
+                            <v-list-item-content>
+                                <v-list-item-title>Manual mine</v-list-item-title>
+                            </v-list-item-content>
+                            <v-list-item-action>
+                                <v-btn @click="submit" elevation=0> Burn mine x{{range}} </v-btn>
+                            </v-list-item-action>
+                        </v-list-item>
 
-            <bars :isAuto="isAuto" />
+                    </v-list>
 
-        </div>
-        <div class="text-sm text-secondary text-center">Bundled burn mining actions per transaction</div>
-    </div>
+                    <v-slider v-model="range" min="1" max="200" step="1"></v-slider>
+                </v-card-text>
+                <v-divider></v-divider>
+                <v-card-text>
+                    <bars :isAuto="isAuto" />
+                    <div class="grey--text mt-2">Bundled burn mining actions per transaction</div>
+                </v-card-text>
+            </v-card>
+        </v-col>
+    </v-row>
 </template>
 
 <script>

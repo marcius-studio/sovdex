@@ -1,18 +1,16 @@
 <template>
-    <div class="container container-padding grid-md">
-        <div class="columns">
-            <div class="column col-6 col-sm-12">
+    <v-container>
+        <v-row class="justify-center mt-0">
+            <v-col cols=12 sm=12 lg=8 md=6>
                 <balance />
                 <dashboard />
-            </div>
-            <div class="column col-6 col-sm-12">
                 <tinterface />
-            </div>
-        </div>
-    </div>
+            </v-col>
+        </v-row>
+    </v-container>
 </template>
 <script>
-    import tinterface from './modules/interface'
+    import tinterface from './interface'
 
     export default {
         components: {

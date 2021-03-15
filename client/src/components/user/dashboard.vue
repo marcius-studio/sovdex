@@ -1,25 +1,28 @@
 <template>
-    <div class="section">
-        <div class="section-item section-item-filled">
-            <div class="columns">
-                <div class="column col-4">
-                    <vc-donut :sections="[section('cpu')]" :size="70" :unit="'%'" :thickness="15" :has-legend="true"
-                        :foreground="settings.foreground" :background="settings.background" :text="cpu.value + '%'"
-                        :auto-adjust-text-size="false" />
-                </div>
-                <div class="column col-4">
-                    <vc-donut :sections="[section('node')]" :size="70" :unit="'%'" :thickness="15" :has-legend="true"
-                        :foreground="settings.foreground" :background="settings.background" :text="node.value + '%'"
-                        :auto-adjust-text-size="false" />
-                </div>
-                <div class="column col-4">
-                    <vc-donut :sections="[section('net')]" :size="70" :unit="'%'" :thickness="15" :has-legend="true"
-                        :foreground="settings.foreground" :background="settings.background" :text="net.value + '%'"
-                        :auto-adjust-text-size="false" />
-                </div>
-            </div>
-        </div>
-    </div>
+    <v-row>
+        <v-col cols=12 md=4 sm=12>
+            <v-card class="px-5 py-5" elevation=3>
+                <vc-donut :sections="[section('cpu')]" :size="70" :unit="'%'" :thickness="15" :has-legend="true"
+                    :foreground="settings.foreground" :background="settings.background" :text="cpu.value + '%'"
+                    :auto-adjust-text-size="false" />
+            </v-card>
+        </v-col>
+        <v-col cols=12 md=4 sm=12>
+            <v-card class="px-5 py-5" elevation=3>
+                <vc-donut :sections="[section('node')]" :size="70" :unit="'%'" :thickness="15" :has-legend="true"
+                    :foreground="settings.foreground" :background="settings.background" :text="node.value + '%'"
+                    :auto-adjust-text-size="false" />
+            </v-card>
+        </v-col>
+        <v-col cols=12 md=4 sm=12>
+            <v-card class="px-5 py-5" elevation=3>
+                <vc-donut :sections="[section('net')]" :size="70" :unit="'%'" :thickness="15" :has-legend="true"
+                    :foreground="settings.foreground" :background="settings.background" :text="net.value + '%'"
+                    :auto-adjust-text-size="false" />
+            </v-card>
+        </v-col>
+    </v-row>
+
 </template>
 
 
@@ -36,8 +39,8 @@
 
 
             settings: {
-                background: '#25282b',
-                foreground: 'rgba(255,255,255,.1)',
+                background: '#1e1e1e',
+                foreground: '#272727',
             },
 
             polling: null

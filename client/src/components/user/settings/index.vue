@@ -1,9 +1,7 @@
 <template>
-    <modal :name="'settings'" :_class="'modal-sm'" :event="'settings'">
-        <div slot="body">
-            <rent class="mb" />
-            <host />
-        </div>
+    <modal title="Settings" event="settings">
+        <rent class="mb-5" />
+        <host />
     </modal>
 </template>
 
