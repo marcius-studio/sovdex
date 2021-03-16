@@ -46,7 +46,13 @@ export const data = async ({ symbol, interval, from, to }) => {
 }
 
 export const lastData = ({ symbol, interval }) =>
-    klinesModel.findOne({ symbol, interval }, { 'data': { $slice: -1 } }).then(res => (res && res.data.length > 0) ? res.data[0] : false)
+    klinesModel.findOne({ symbol, interval }, { 'data': { $slice: -1 } }).then(res => {
+        if (res && res.data && res.data.length > 0) {
+            return res.data[0]
+        } else {
+            return false
+        }
+    })
 
 
 // mutations --------------------------
