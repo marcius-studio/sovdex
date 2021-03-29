@@ -13,7 +13,13 @@ export default class BuildCandle {
 
     init() {
         return this.ticks()
-            .then(res => this.buildCandles(res))
+            .then(res => {
+                if (res && Array.isArray(res)) {
+                    this.buildCandles(res)
+                } else {
+                    console.log('[build candle] error response ticks "then"')
+                }
+            })
             .catch(() => console.log('[build candle] error response ticks'))
     }
 
